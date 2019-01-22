@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<!-- Procesar exito -->
+	<bean id="sendMessageApproval"
+		class="ve.com.digitel.rechargeorchestratorbdp.delegator.SendMessageApprovalDelegator"
+		init-method="init">
+		<constructor-arg type="java.lang.String" value="" />
+	</bean>
+
+	<!-- Procesar mensaje fallo -->
+	<bean id="processFailures"
+		class="ve.com.digitel.rechargeorchestratorbdp.delegator.ProcessFailuresDelegator"
+		init-method="init">
+		<constructor-arg type="java.lang.String" value="" />
+	</bean>
+
+	
+	<bean id="performAction"
+		class="ve.com.digitel.rechargeorchestratorbdp.delegator.PerformActionDelegator"
+		init-method="init" p:positiveOutcomeStep-ref="sendMessageApproval"
+		p:negativeOutcomeStep-ref="processFailures">
+		<constructor-arg type="java.lang.String" value="" />
+	</bean>
+
+	<!--   Paso validación de datos de entrada --> 
+	<bean id="validateInput"
+		class="ve.com.digitel.rechargeorchestratorbdp.delegator.ValidateInputDelegator"
+		init-method="init" p:positiveOutcomeStep-ref="performAction"
+		p:negativeOutcomeStep-ref="processFailures">
+		<constructor-arg type="java.lang.String" value="" />
+	</bean> 
+
+  	<bean id="business"
+		class="ve.com.digitel.rechargeorchestratorbdp.business.BusinessImplementation"
+		init-method="init" p:businessRules-ref="validateInput" />
+	
+	<!--  Proxys de servicios que intervienen en el orquestador de recarga  -->
+	
+	<!--  Proxy rechargeValidationSolicitude -->
+		
+	<bean id="rechargeValidationSolicitudeHttpClient" class="ve.com.digitel.rechargeorchestratorbdp.proxy.RechargeValidationSolicitudeHttpClient" 
+									     init-method="init"
+									     p:endPointURL="RECHARGEVALIDATIONSOLICITUDE_ENDPOINT"
+									     p:timeOutHttp="RECHARGEVALIDATIONSOLICITUDE_TIMEOUT"
+									     p:respOk="RECHARGEVALIDATIONSOLICITUDE_HTTP_RESP_CODE_OK"
+									     p:httpRespOk="RECHARGEVALIDATIONSOLICITUDE_HTTP_CLIENT_RESP_OK"
+									     p:contentType="RECHARGEVALIDATIONSOLICITUDE_CONTENT_TYPE"
+									     p:contentEncoding="RECHARGEVALIDATIONSOLICITUDE_CONTENT_ENCODING" 
+									     />
+									     
+   <!--  Proxy PaymentFacadeBanesco -->
+     
+   <bean id="paymentFacadeBanescoHttpClient" class="ve.com.digitel.rechargeorchestratorbdp.proxy.PaymentFacadeBanescoHttpClient" 
+									     init-method="init"
+									     p:endPointURL="PAYMENTFACADEBANESCO_ENDPOINT"
+									     p:timeOutHttp="PAYMENTFACADEBANESCO_TIMEOUT"
+									     p:respOk="PAYMENTFACADEBANESCO_HTTP_RESP_CODE_OK"
+									     p:httpRespOk="PAYMENTFACADEBANESCO_HTTP_CLIENT_RESP_OK"
+									     p:contentType="PAYMENTFACADEBANESCO_CONTENT_TYPE"
+									     p:contentEncoding="PAYMENTFACADEBANESCO_CONTENT_ENCODING"
+									     />
+   
+   <!--  Proxy rechargeValidationCancellation -->
+    
+   <bean id="rechargeValidationCancellationHttpClient" class="ve.com.digitel.rechargeorchestratorbdp.proxy.RechargeValidationCancellationHttpClient" 
+									     init-method="init"
+									     p:endPointURL="RECHARGEVALIDATIONCANCELLATION_ENDPOINT"
+									     p:timeOutHttp="RECHARGEVALIDATIONCANCELLATION_TIMEOUT"
+									     p:respOk="RECHARGEVALIDATIONCANCELLATION_HTTP_RESP_CODE_OK"
+									     p:httpRespOk="RECHARGEVALIDATIONCANCELLATION_HTTP_CLIENT_RESP_OK"
+									     p:contentType="RECHARGEVALIDATIONCANCELLATION_CONTENT_TYPE"
+									     p:contentEncoding="RECHARGEVALIDATIONCANCELLATION_CONTENT_ENCODING" 
+									     
+									     />
+   
+   <!--  Proxy rechargeSolicitude -->					
+	  
+	<bean id="rechargeSolicitudeHttpClient" class="ve.com.digitel.rechargeorchestratorbdp.proxy.RechargeSolicitudeHttpClient" 
+									     init-method="init"
+									     p:endPointURL="RECHARGESOLICITUDE_ENDPOINT"
+									     p:timeOutHttp="RECHARGESOLICITUDE_TIMEOUT"
+									     p:respOk="RECHARGESOLICITUDE_HTTP_RESP_CODE_OK"
+									     p:httpRespOk="RECHARGESOLICITUDE_HTTP_CLIENT_RESP_OK"
+									     p:contentType="RECHARGESOLICITUDE_CONTENT_TYPE"
+									     p:contentEncoding="RECHARGESOLICITUDE_CONTENT_ENCODING" 
+									     />	
+		
+</beans>
