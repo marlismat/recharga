@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Propiedades manejadas por el servicio RechargeOrchestratorBDP </comment>
+<entry key="PREFIJO_TRACE_ID">RechargeOrchestratorBDP</entry>
+<entry key="NAME">RechargeOrchestratorBDP</entry>
+<entry key="PARAM_BENEFICIARY">BENEFICIARY</entry>
+<entry key="PARAM_AFFILIATE">AFFILIATE</entry>
+<entry key="SEPARATOR">;</entry>
+<entry key="ORDENNUMBER_REGEX">[0-9]+</entry>
+<entry key="CUSTOMERACCOUNTID_REGEX">\d{11,11}</entry>
+<entry key="AMOUNT_REGEX">\d+(\.\d{2,2})</entry>
+<entry key="STATUSID_REGEX">\d{1,1}</entry>
+<entry key="INTERACTIONDATE_REGEX">[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}T[0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}.[0-9]{3,3}-[0-9]{4,4}|[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}T[0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}</entry>
+<entry key="PAYMENTDATETIME_REGEX">[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}T[0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}.[0-9]{3,3}-[0-9]{4,4}|[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}T[0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}</entry>
+
+<entry key="IP_REGEX">^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$|^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$</entry>
+<entry key="NUMBERTDC_REGEX">\d+</entry>
+<entry key="CVCTDC_REGEX">\d{3,3}</entry>
+<entry key="EXPDATETDC_REGEX">\d{2,2}(\/\d{4,4})</entry>
+<entry key="TYPETDC_REGEX">VISA|MASTERCARD</entry>
+<entry key="HOLDERNAMETDC_REGEX">(.*)</entry>
+<entry key="HOLDERIDTDC_REGEX">(.*)</entry>
+<entry key="INTERACTIONROLEVALUE_REGEX">(.*)</entry>
+<entry key="INTERACTIONROLE_REGEX"></entry>
+<!-- <entry key="INTERACTIONROLE_REGEX">CHANNEL|INSTITUTION|COMMERCE|TERMINAL</entry> -->
+<entry key="FORMOFPAY_REGEX">DEBIT|CREDIT</entry>
+<entry key="TYPEOPERATION_REGEX">PAY</entry>
+
+<entry key="SEPARATOR_CHANNEL">-</entry>
+<entry key="CHANNEL_PTF_DEFAULT">22</entry><!--22 App 7 BDP-->
+
+<entry key="FORMAT_DATE">yyyy-MM-dd'T'HH:mm:ss.SSSZ</entry>
+<entry key="FORMAT_DATE2">yyyy-MM-dd'T'HH:mm:ss</entry>
+<entry key="TIME_ZONE">GMT-4:30</entry>
+
+<entry key="APPLYING_CANCELLATION_CODE">400;401;403;503</entry>
+
+<!-- servicio RechargeValidationSolicitude -->
+<entry key="RECHARGE_VALIDATION_CUSTOMER_ORDER_TYPE">Recarga Web</entry>
+<entry key="RECHARGE_VALIDATION_INTERACTION_ROLE">ROLES</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_CHANNEL">CHANNEL</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_INSTITUTION">INSTITUTION</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_COMMERCE">COMMERCE</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_TERMINAL">TERMINAL</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_BENEFICIARY">BENEFICIARY</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_AFFILIATE">AFFILIATE</entry>
+<entry key="RECHARGE_VALIDATION_PARAM_IPADDRESS">IPADDRESS</entry>
+
+<entry key="RECHARGEVALIDATIONSOLICITUDE_HTTP_CLIENT_RESP_OK">200</entry>
+<entry key="RECHARGEVALIDATIONSOLICITUDE_HTTP_RESP_CODE_OK">BCRM-03007-OM0000</entry>
+<!-- <entry key="RECHARGEVALIDATIONSOLICITUDE_ENDPOINT">http://CFGLOBD08:6093/RechargeValidationSolicitude/RechargeValidationSolicitudeServices?WSDL</entry> -->
+<entry key="RECHARGEVALIDATIONSOLICITUDE_ENDPOINT">http://10.192.127.113:7002/RechargeValidationSolicitudeBDP/RechargeValidationSolicitudeServices?WSDL</entry>
+<entry key="RECHARGEVALIDATIONSOLICITUDE_TIMEOUT">10000</entry>
+<entry key="RECHARGEVALIDATIONSOLICITUDE_CONTENT_TYPE">text/xml</entry>
+<entry key="RECHARGEVALIDATIONSOLICITUDE_CONTENT_ENCODING">UTF-8</entry>
+
+
+<!-- servicio WSPaymentFacadeBanesco -->
+<!-- Dummy -->
+<!--<entry key="PAYMENTFACADEBANESCO_ENDPOINT">http://10.192.13.47:6151/WSPaymentFacadeBanesco/WSPaymentFacadeBanesco?WSDL</entry>-->
+<!--<entry key="PAYMENTFACADEBANESCO_ENDPOINT">http://10.192.13.41:8563/WSPaymentFacadeBanesco/WSPaymentFacadeBanesco?WSDL</entry>-->
+<entry key="PAYMENTFACADEBANESCO_ENDPOINT">http://10.192.127.100:7053/WSPaymentFacadeBanesco/WSPaymentFacadeBanesco?wsdl</entry>
+<entry key="PAYMENTFACADEBANESCO_TIMEOUT">10000</entry>
+<entry key="PAYMENTFACADEBANESCO_HTTP_RESP_CODE_OK">OM0000</entry>
+<entry key="PAYMENTFACADEBANESCO_HTTP_CLIENT_RESP_OK">200</entry>
+<entry key="PAYMENTFACADEBANESCO_BANK_RESP_OK">201</entry>
+<entry key="PAYMENTFACADEBANESCO_CONTENT_TYPE">text/xml</entry>
+<entry key="PAYMENTFACADEBANESCO_CONTENT_ENCODING">UTF-8</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_CHANNEL">CHANNEL</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_KEY">KEYID</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_KEY_VALUE">0C477E61-99EF-4AE7-80CF-76FE5179A0B9</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_PUBLICKEY">PUBLICKEYID</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_PUBLICKEY_VALUE">830a32c491f8003a83982d1509d16d57</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_TYPE_OPERATION">CREATE_PAYMENT</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_TYPE_OPERATION_DESCRIPTION">Pago de Servicios Digitel</entry>
+<entry key="PAYMENTFACADEBANESCO_PARAM_VOUCHER"><![CDATA[<voucher>]]></entry>
+
+<!-- servicio RechargeSolicitude -->
+<entry key="RECHARGESOLICITUDE_ENDPOINT">http://10.192.13.38:8901/RechargeSolicitude/RechargeSolicitudeServices?WSDL</entry>
+<entry key="RECHARGESOLICITUDE_TIMEOUT">10000</entry>
+<entry key="RECHARGESOLICITUDE_HTTP_RESP_CODE_OK">BCRM-03008-OM0000</entry>
+<entry key="RECHARGESOLICITUDE_HTTP_CLIENT_RESP_OK">200</entry>
+<entry key="RECHARGESOLICITUDE_CONTENT_TYPE">text/xml</entry>
+<entry key="RECHARGESOLICITUDE_CONTENT_ENCODING">UTF-8</entry>
+<entry key="RECHARGESOLICITUDE_NDIGITB">4</entry>
+<entry key="RECHARGESOLICITUDE_DIGITM">*</entry>
+<entry key="RECHARGESOLICITUDE_CUSTOMER_ORDER_TYPE">Recarga Web</entry>
+<entry key="RECHARGESOLICITUDE_CARDPMID">00</entry>
+<entry key="RECHARGESOLICITUDE_INTERACTIONROLE">Role</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_BENEFICIARY">BENEFICIARY</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_AFFILIATE">AFFILIATE</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_EMAIL">EMAIL</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_CHANNEL">CHANNEL</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_INSTITUTION">INSTITUTION</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_COMMERCE">COMMERCE</entry>
+<entry key="RECHARGESOLICITUDE_PARAM_TERMINAL">TERMINAL</entry>
+
+ 
+<!-- servicio RechargeValidationCancellation -->
+<entry key="RECHARGEVALIDATIONCANCELLATION_ENDPOINT">http://10.192.13.38:8901/RechargeValidationCancellation/RechargeValidationCancellationServices?WSDL</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_TIMEOUT">10000</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_HTTP_RESP_CODE_OK">BCRM-03005-OM0000</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_HTTP_CLIENT_RESP_OK">200</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_CONTENT_TYPE">text/xml</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_CONTENT_ENCODING">UTF-8</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_NDIGITB">4</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_DIGITM">*</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_CUSTOMER_ORDER_TYPE">Recarga Web</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_BENEFICIARY">BENEFICIARY</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_AFFILIATE">AFFILIATE</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_CHANNEL">CHANNEL</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_INSTITUTION">INSTITUTION</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_COMMERCE">COMMERCE</entry>
+<entry key="RECHARGEVALIDATIONCANCELLATION_PARAM_TERMINAL">TERMINAL</entry>
+
+<entry key="URL_WS_FACADE_PAYMENT">http://10.192.127.109:7101/WSFacadePaymentWAR/WSFacadePaymentService</entry>
+<entry key="USUARIO">digiteladmin</entry>
+<entry key="CONTRASENA">Prueba2*</entry>
+<entry key="KEY_ENCRIPTA">12345</entry>
+
+</properties>

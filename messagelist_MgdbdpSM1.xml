@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- Propiedades para la mensajeria funcional del servicio RechargeOrchestratorBDP-->
+<comment>Mensajes manejados por el servicio RechargeOrchestratorBDP</comment>
+<!-- Nombre de Servicio -->
+<entry key="NAME">RechargeOrchestratorBDP</entry>
+<!-- Mensajes de Validación Exitosa o errores externos -->
+<!-- Mesnaje Global de exito -->
+<entry key="F_MESSAGE00">OM0000;Operación Exitosa</entry>
+<!-- mensaje exito de cada consulta -->
+<entry key="F_MESSAGE00_00">0M0000;Operación Exitosa</entry>
+<!-- Mensajes Funcionales -->
+<entry key="F_MESSAGE01">0M0001;Datos de entrada Inválidos</entry>
+<entry key="F_MESSAGE_02">01;Parámetro Inválido: el número de orden es inválido.</entry>
+<entry key="F_MESSAGE_03">01;Parámetro Inválido: Fecha Interacción en formato inválido</entry>
+<entry key="F_MESSAGE_05">01;Parámetro Inválido: el gsm indicado no tiene un formato válido</entry>
+<entry key="F_MESSAGE_06">01;Parámetro Inválido: el monto no tiene un formato adecuado</entry>
+<entry key="F_MESSAGE_07">01;Parámetro Inválido: el status tiene un valor no permitido</entry>
+<entry key="F_MESSAGE_08">01;Parámetro Inválido: la fecha de pago tiene un formato inválido</entry>
+<entry key="F_MESSAGE_09">01;Parámetro inválido: la zona horario tiene un formato no permitido</entry>
+<entry key="F_MESSAGE_10">01;Parámetro inválido: la direccióm ip no es ni v4 ni v6</entry>
+<entry key="F_MESSAGE_11">01;Parámetro inválido: el numero de la TDC es inválido</entry>
+<entry key="F_MESSAGE_12">01;Parámetro inválido: el código de seguridad de la TDC es inválido.</entry>
+<entry key="F_MESSAGE_13">01;Parámetro inválido: la fecha de expiración de la TDC es inválido.</entry>
+<entry key="F_MESSAGE_14">01;Parámetro inválido: el tipo de tarjeta es inválido.</entry>
+<entry key="F_MESSAGE_15">01;Parámetro inválido: el nombre del tarjeta habiente es inválido.</entry>
+<entry key="F_MESSAGE_16">01;Parámetro inválido:la cédula de identidad del tarjeta habiente es inválida</entry>
+<entry key="F_MESSAGE_17">01;Parámetro inválido: falta el parámetro channel, institucion,comercio o terminal</entry>
+<entry key="F_MESSAGE_18">01;Parámetro inválido: el valor de los parámetros channel, institucion, comerio o terminal no puede ir en null o vacio.</entry>
+<entry key="F_MESSAGE_19">01;Parámetro inválido: la forma de pago no esta permitida solo se permite CREDIT o DEBIT</entry>
+<entry key="F_MESSAGE_20">01;Parámetro inválido: el tipo de operación no esta permitido, solo se permite PAY o VALIDATION</entry>
+<entry key="F_MESSAGE_21">02;Error en el proxy de RechargeValidationSolicitude, consulte los logs para mayor detalle</entry>
+<entry key="F_MESSAGE_22">02;Error en el proxy de PaymentFacadeBanesco, consulte los logs para mayor detalle</entry>
+<entry key="F_MESSAGE_23">02;Error en el proxy de RechargeSolicitude, consulte los logs para mayor detalle</entry>
+<entry key="F_MESSAGE_24">02;Error en el proxy de RechargeValidationCancellation, consulte los logs para mayor detalle</entry>
+<entry key="F_MESSAGE_25">02;La recarga no se pudo realizar en el banco, consulte los logs para mayor detalle</entry>
+<!-- mensaje técnicos -->
+<entry key="E_MESSAGE01">EM0001;Error de ejecución del servicio RechargeOrchestratorBDP revise los logs para mayor detalle</entry>
+</properties>
