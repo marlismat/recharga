@@ -152,11 +152,14 @@ public class RechargeValidationSolicitudeHttpClient {
 				method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
 				
 				String xmlString =parseRequest(createRequest(operation,interactionDate,orderNumber,parameters));
+				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+xmlString);
+				xmlString=xmlString.replace("<ve.com.digitel.canonicalbusinessinteractionobjects.to.CardPM>","").replace("</ve.com.digitel.canonicalbusinessinteractionobjects.to.CardPM>","");
 				StringRequestEntity str = new StringRequestEntity(xmlString
 						,getContentType()
 						,getContentEncoding());
 				method.setRequestEntity(str);
 				if(logger.isDebugEnabled()){
+					System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
 					logger.debug("Request: "+xmlString);
 					
 				}
@@ -362,25 +365,7 @@ public class RechargeValidationSolicitudeHttpClient {
 	   CustomerAccountInteractionRole affiliate=new CustomerAccountInteractionRole();
 	   
 	   
-	   /*************NEW 26-11-2018******************/
-	   /*Payment payment=new Payment();
-	   payment.setId(operation.getBankResponse().getId());
-	   payment.setConfirmationNumber(Long.parseLong(operation.getBankResponse().getReference()));
-	   payment.setAmount(Double.parseDouble(operation.getAmount()));
-	   
-	   
-	   
-	   //Calendar cal = Calendar.getInstance(TimeZone.getTimeZone(AppProperties.getProperty("TIME_ZONE")));
-	   cal.setTime(stringToDate(interactionDate));
-	   payment.setPaymentDate(cal);
-	   payment.setCardPM(new CardPM());
-	   payment.getCardPM().setId(AppProperties.getProperty("RECHARGESOLICITUDE_CARDPMID"));
-	   payment.getCardPM().setPaymentMethodType(operation.getFormOfPay());
-	   payment.getCardPM().setIdCardHolderName(operation.getCreditCardHolderId());
-	   payment.getCardPM().setCardNumber(enmascarar(operation.getCreditCardNumber()));
-	   //beneficiary.getCustomerAccount().getPayment().add(payment);
-	   //customerOrderItem.getCustomerAccountInteractionRole().add(beneficiary);
-	   /***************NEW 26-11-2018********************/
+	  
 	   
 	   beneficiary.setInteractionRole(AppProperties.getProperty("RECHARGE_VALIDATION_PARAM_BENEFICIARY"));
 	   beneficiary.setCustomerAccount(new CustomerAccount());
@@ -415,7 +400,7 @@ public class RechargeValidationSolicitudeHttpClient {
 	   aa.add(card);
 	   
 	   affiliate.getCustomerAccount().setCardPM(aa);
-	   
+
 	   	   
 	   customerOrderItem.getCustomerAccountInteractionRole().add(beneficiary);
 	   customerOrderItem.getCustomerAccountInteractionRole().add(affiliate);
