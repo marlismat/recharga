@@ -145,9 +145,12 @@ public class RechargeSolicitudeHttpClient {
 		try{
 				httpClient = new HttpClient();
 				httpClient.getParams().setParameter("http.connection.timeout", new Integer(getTimeOutHttp()));
+				System.out.println("1");
 				method=new PostMethod(getEndPointURL());
 				method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
+				System.out.println("2");
 				String xmlString =parseRequest(createRequest(operation,interactionDate,orderNumber,parameters));
+				System.out.println("3");
 				StringRequestEntity str = new StringRequestEntity(xmlString
 						,getContentType()
 						,getContentEncoding());
@@ -249,6 +252,10 @@ public class RechargeSolicitudeHttpClient {
 	   XStream xstream=new XStream();
 	   prepareXstream(xstream);
 	   requestXML=xstream.toXML(request);
+	   String id = "<customerOrderItem> <id>010_04120000272_20190109093000</id>";
+//	   C+request.getCustomerOrder().getId().toString();
+	   requestXML=requestXML.replace("<customerOrderItem>", id);
+	   System.out.println(requestXML);
 	   requestXML="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://services.rechargesolicitude.digitel.com.ve/\">"+
 	   "<soapenv:Header/>"+
 	   		"<soapenv:Body>"+
@@ -265,7 +272,8 @@ public class RechargeSolicitudeHttpClient {
 	   RechargeSolicitudeRequest request=new RechargeSolicitudeRequest();
 	   request.setCustomerOrder(new CustomerOrder());
 	   request.getCustomerOrder().setId(operation.getPurchaseOrderNumber());
-	   request.getCustomerOrder().setOrderItemNumber(new BigDecimal(operation.getPurchaseOrderNumber()));
+	   request.getCustomerOrder().setOrderItemNumber(new BigDecimal(0));
+	   System.out.println("3");
 	   request.getCustomerOrder().setCustomerOrderType(AppProperties.getProperty("RECHARGESOLICITUDE_CUSTOMER_ORDER_TYPE"));
 	   request.getCustomerOrder().setPurchaseOrderNumber(operation.getPurchaseOrderNumber());
 	   request.getCustomerOrder().setCustomerOrderItem(new ArrayList<CustomerOrderItem>());
@@ -283,13 +291,20 @@ public class RechargeSolicitudeHttpClient {
 	   beneficiary.getCustomerAccount().setId(operation.getBeneficiary());
 	   beneficiary.getCustomerAccount().setPayment(new ArrayList<Payment>());
 	   
-	   System.out.println("bANDERA ");
+	   System.out.println("4");
 	   Payment payment=new Payment();
-	   payment.setId(operation.getBankResponse().getId());
-	   payment.setConfirmationNumber(Long.parseLong(operation.getBankResponse().getReference()));
+	  
+	   /////////// SOLO PRUEBA
+	   payment.setId("123456");
+	   payment.setConfirmationNumber(1L);
+	   
+	   ///////////////////////////////////
+	   
+	   //payment.setId(operation.getBankResponse().getId());
+	   //payment.setConfirmationNumber(Long.parseLong(operation.getBankResponse().getReference()));
 	   payment.setAmount(Double.parseDouble(operation.getAmount()));
 	   
-	   
+	   System.out.println("5");
 	   
 	   Calendar cal = Calendar.getInstance(TimeZone.getTimeZone(AppProperties.getProperty("TIME_ZONE")));
 	   cal.setTime(stringToDate(interactionDate));
@@ -302,6 +317,7 @@ public class RechargeSolicitudeHttpClient {
 	   beneficiary.getCustomerAccount().getPayment().add(payment);
 	   item.getCustomerAccountInteractionRole().add(beneficiary);
 	   
+	   System.out.println("6");
 	   
 	   item.setPartyInteractionRole(new PartyInteractionRole());
 	   item.getPartyInteractionRole().setInteractionRole(AppProperties.getProperty("RECHARGESOLICITUDE_INTERACTIONROLE"));
@@ -314,11 +330,11 @@ public class RechargeSolicitudeHttpClient {
 	   email.getEmailContact().add(emailContact);
 	   item.getPartyInteractionRole().getPartyRole().add(email);
 	   request.getCustomerOrder().getCustomerOrderItem().add(item);
-	   
+	   System.out.println("73");
 	   
 	   request.getCustomerOrder().setPartyInteractionRole(new PartyInteractionRole());
 	   request.getCustomerOrder().getPartyInteractionRole().setPartyRole(new ArrayList<PartyRole>());
-	   
+	   System.out.println("8");
 	   String channels=parameters.get(AppProperties.getProperty("RECHARGESOLICITUDE_PARAM_CHANNEL"));
 	   String firstLevel[]=channels.split(AppProperties.getProperty("SEPARATOR"));	   
 	   String idChannelPtf;
@@ -331,14 +347,14 @@ public class RechargeSolicitudeHttpClient {
 		   idChannelPtf=secondLevel[1];
 	   idChannel=secondLevel[0];
 	   
-	   
+	   System.out.println("8");
 	   PartyRole channel_ptf=new PartyRole(); channel_ptf.setName(AppProperties.getProperty("RECHARGESOLICITUDE_PARAM_CHANNEL")+"_PTF");
 	   channel_ptf.setParty(new Party()); channel_ptf.getParty().setPartyId(Integer.parseInt(idChannelPtf));
-	   
+	   System.out.println("10");
 	   PartyRole channel=new PartyRole();
 	   channel.setName(AppProperties.getProperty("RECHARGESOLICITUDE_PARAM_CHANNEL")); channel.setParty(new Party());
 	   channel.getParty().setName(nameChannel);  channel.getParty().setPartyId(Integer.parseInt(idChannel));		   
-	   
+	   System.out.println("11");
 	   request.getCustomerOrder().getPartyInteractionRole().getPartyRole().add(channel_ptf);
 	   request.getCustomerOrder().getPartyInteractionRole().getPartyRole().add(channel);
 	   
